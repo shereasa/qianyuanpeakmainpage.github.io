@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
  
   /* ========== 快捷入口跳转 ========== */
   var shortcutMap = {
-    '游客守则': 'rules.html',
+    '游客守则': 'rules_1.html',
     '景区地图': 'map.html',
     '在线购票': 'ticket.html',
     '服务中心': 'service.html',
