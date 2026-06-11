@@ -1,0 +1,326 @@
+/* ============================================================
+   乾元峰 — 景区资讯 / 公告系列样式 (news.css)
+   ============================================================ */
+
+/* ---------- 目录页列表 ---------- */
+.news-list-desc {
+  font-size: 13.5px;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+  letter-spacing: 0.3px;
+}
+
+.news-list {
+  list-style: none;
+  border-top: 1px solid var(--border-light);
+}
+
+.news-list-item {
+  border-bottom: 1px solid var(--border-light);
+  transition: background 0.18s;
+}
+.news-list-item:hover { background: #f7f4ec; }
+
+.news-list-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 10px;
+  text-decoration: none;
+  color: var(--text-main);
+}
+.news-list-link:hover .news-list-title { color: var(--green-nav); text-decoration: underline; }
+
+.news-list-title {
+  flex: 1;
+  font-size: 14.5px;
+  letter-spacing: 0.3px;
+  transition: color 0.18s;
+}
+
+.news-list-date {
+  font-size: 13px;
+  color: var(--text-sub);
+  white-space: nowrap;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* 标签 */
+.news-list-tag {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 3px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.news-list-tag--notice {
+  background: #e8f0ff;
+  color: #2a4a9a;
+  border: 1px solid #b8ccf0;
+}
+.news-list-tag--normal {
+  background: #eaf2e8;
+  color: #1a5c1a;
+  border: 1px solid #b6deb6;
+}
+.news-list-tag--urgent {
+  background: #fde8e8;
+  color: #8b1a1a;
+  border: 1px solid #f5c6c6;
+}
+
+/* ---------- 文章页通用 ---------- */
+.news-article-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+}
+
+.news-article-body {
+  font-size: 14.5px;
+  line-height: 2;
+  color: var(--text-main);
+  letter-spacing: 0.4px;
+}
+.news-article-body p {
+  margin-bottom: 14px;
+  text-indent: 2em;
+}
+/* 小标题段落不缩进 */
+.news-article-body p strong:first-child {
+  display: block;
+  text-indent: 0;
+}
+
+.news-article-sign {
+  margin-top: 32px;
+  text-align: right;
+  font-size: 14px;
+  color: var(--text-main);
+  line-height: 2;
+  letter-spacing: 0.5px;
+}
+
+/* 红色紧急提示框 */
+.news-urgent-box {
+  background: #fff5f5;
+  border: 1px solid #f5c6c6;
+  border-left: 4px solid #8b1a1a;
+  border-radius: 0 4px 4px 0;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: #8b1a1a;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  letter-spacing: 0.3px;
+}
+
+/* 返回按钮 */
+.news-back-bar {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+.news-back-btn {
+  display: inline-block;
+  font-size: 13.5px;
+  color: var(--green-nav);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: color 0.18s, background 0.18s;
+}
+.news-back-btn:hover {
+  background: #eef4ec;
+  color: var(--green-hover);
+}
+
+/* ---------- 十佳员工公示表格 ---------- */
+.news-staff-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin-bottom: 4px;
+}
+.news-staff-table th {
+  background: var(--green-dark);
+  color: #c8d8c0;
+  padding: 9px 14px;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.news-staff-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #ece9df;
+  vertical-align: middle;
+  line-height: 1.7;
+  color: var(--text-main);
+}
+.news-staff-table tr:hover td { background: #f7f4ec; }
+.news-staff-table__special td {
+  background: #fafaf7;
+  color: #999;
+}
+.news-staff-table__special:hover td { background: #f7f4ec; }
+
+/* ============================================================
+   寻物启事专属样式 (lostfound)
+   ============================================================ */
+
+.lf-table td {
+  vertical-align: top;
+  line-height: 1.8;
+  font-size: 13.5px;
+}
+
+.lf-id {
+  font-family: 'Courier New', monospace;
+  font-size: 12.5px;
+  color: var(--text-sub);
+  white-space: nowrap;
+}
+
+.lf-row--odd td { background: #fafaf7; }
+.lf-row--staff td {
+  background: #f7f4ec;
+}
+
+/* 认领状态标签 */
+.lf-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.lf-tag--pending {
+  background: #fff8e0;
+  color: #7a5500;
+  border: 1px solid #e8cc80;
+}
+.lf-tag--refused {
+  background: #fde8e8;
+  color: #8b1a1a;
+  border: 1px solid #f5c6c6;
+}
+.lf-tag--closed {
+  background: #ebebeb;
+  color: #555;
+  border: 1px solid #ccc;
+}
+
+.lf-footer-note {
+  margin-top: 16px;
+  font-size: 12.5px;
+  color: var(--text-sub);
+  letter-spacing: 0.3px;
+  line-height: 1.8;
+}
+
+/* ============================================================
+   330公交线路专属样式
+   ============================================================ */
+
+.bus-info-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.bus-info-item {
+  flex: 1 1 160px;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 18px;
+  border-right: 1px solid var(--border-light);
+  background: #fafaf7;
+}
+.bus-info-item:last-child { border-right: none; }
+
+.bus-info-label {
+  font-size: 11.5px;
+  color: var(--text-sub);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.bus-info-value {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--green-dark);
+  letter-spacing: 0.5px;
+}
+
+/* 站点路线条 */
+.bus-route-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: #f7f4ec;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin-bottom: 28px;
+}
+
+.bus-stop {
+  font-size: 13px;
+  color: var(--text-main);
+  padding: 4px 10px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.bus-stop--terminal {
+  background: var(--green-dark);
+  color: #fff;
+  border-color: var(--green-dark);
+  font-weight: 700;
+}
+.bus-arrow {
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 时刻表 */
+.bus-table-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--green-dark);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.bus-table td {
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--text-sub);
+}
+.bus-table td:first-child {
+  text-align: left;
+  font-family: var(--font-cn);
+  font-size: 13.5px;
+  color: var(--text-main);
+}
