@@ -7,11 +7,16 @@ document.addEventListener('DOMContentLoaded', function () {
     '游客守则': 'rules_1.html',
     '景区地图': 'map_2.html',
     '在线购票': 'services/ticket/ticket_10.html',
-    '在线客服': 'service.html',
+    '在线客服': 'contact/online_28.html',
   };
- 
+
   document.querySelectorAll('.shortcut').forEach(function (sc) {
     sc.addEventListener('click', function (e) {
+      var href = sc.getAttribute('href');
+      if (href && href !== '#') {
+        window.location.href = href;
+        return;
+      }
       e.preventDefault();
       var label = sc.querySelector('.shortcut__label').textContent.trim();
       if (shortcutMap[label]) {
@@ -35,7 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
   if (moreBtn) {
     moreBtn.addEventListener('click', function (e) {
       e.preventDefault();
-      window.location.href = 'notice.html';
+      var href = moreBtn.getAttribute('href');
+      window.location.href = (href && href !== '#') ? href : 'news/news/news_15.html';
     });
   }
  
