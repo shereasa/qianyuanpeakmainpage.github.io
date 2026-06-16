@@ -329,3 +329,61 @@
   transition: background 0.18s;
 }
 .chat-send-btn:hover { background: var(--green-hover); }
+
+/* ---------- 结局叙事页 ---------- */
+.end-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: #1a1a1a;
+}
+.end-page--happy,
+.end-page--true {
+  background: linear-gradient(160deg, #f7f4ec 0%, #e8efe4 100%);
+}
+.end-screen {
+  max-width: 640px;
+  width: 100%;
+  text-align: center;
+}
+.end-line {
+  font-size: 17px;
+  line-height: 2;
+  color: #e8e8e8;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.end-page--happy .end-line,
+.end-page--true .end-line {
+  color: var(--text-main);
+}
+.end-line--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.end-line--title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-top: 24px;
+}
+.end-home-link {
+  margin-top: 36px;
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.end-home-link--visible { opacity: 1; }
+.end-home-link a {
+  color: #888;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.end-home-link a:hover { color: var(--green-nav); }

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> — </title>
+  <link rel="stylesheet" href="forum.css" />
+  <style>body { margin: 0; min-width: auto; }</style>
+</head>
+<body class="forum-horror-page">
+
+  <div class="forum-horror-welcome-bg" id="welcomeBg" aria-hidden="true"></div>
+
+  <div class="forum-horror-inner" id="stage">
+
+    <!-- 前置问：继续刷新后 -->
+    <div id="step0">
+      <p class="forum-horror-question">你选择了继续刷新，是想留下来吗？</p>
+      <div class="forum-horror-choices">
+        <button type="button" class="forum-horror-choice" onclick="toStep1()">是</button>
+        <button type="button" class="forum-horror-choice" onclick="clickNo()">否</button>
+      </div>
+    </div>
+
+    <!-- 第一问 -->
+    <div id="step1" style="display:none;">
+      <p class="forum-horror-question">是否愿意加入乾元峰大家庭</p>
+      <div class="forum-horror-choices">
+        <button type="button" class="forum-horror-choice" onclick="toStep2()">是</button>
+        <button type="button" class="forum-horror-choice" onclick="toStep2()">是</button>
+      </div>
+    </div>
+
+    <!-- 第二问 -->
+    <div id="step2" style="display:none;">
+      <p class="forum-horror-question">是否愿意永远留在乾元峰</p>
+      <div class="forum-horror-choices">
+        <button type="button" class="forum-horror-choice" onclick="showResult()">是</button>
+        <button type="button" class="forum-horror-choice" onclick="showResult()">是</button>
+      </div>
+    </div>
+
+    <!-- 结果 -->
+    <div id="stepResult" style="display:none;">
+      <p class="forum-horror-result">恭喜你，乾元峰景区永远是您的家</p>
+    </div>
+
+  </div>
+
+  <script src="forum.js"></script>
+  <script>
+    forumFillWelcomeBg('welcomeBg', 180);
+
+    if (sessionStorage.getItem('forumTrapped') === '1') {
+      window.location.replace('badend_40.html');
+    }
+
+    var trapped = false;
+
+    function clickNo() {
+      /* 外观与「是」相同，但不发生任何跳转 */
+    }
+
+    function toStep1() {
+      document.getElementById('step0').style.display = 'none';
+      document.getElementById('step1').style.display = 'block';
+    }
+
+    function toStep2() {
+      document.getElementById('step1').style.display = 'none';
+      document.getElementById('step2').style.display = 'block';
+    }
+
+    function showResult() {
+      document.getElementById('step2').style.display = 'none';
+      document.getElementById('stepResult').style.display = 'block';
+      forumSetTrapped();
+      trapped = true;
+    }
+
+    window.addEventListener('beforeunload', function() {});
+
+    document.addEventListener('click', function(e) {
+      if (trapped && !e.target.classList.contains('forum-horror-choice')) {
+        window.location.href = 'badend_40.html';
+      }
+    });
+
+    window.addEventListener('keydown', function() {
+      if (trapped) window.location.href = 'badend_40.html';
+    });
+
+    document.addEventListener('visibilitychange', function() {
+      if (trapped) window.location.href = 'badend_40.html';
+    });
+  </script>
+</body>
+</html>

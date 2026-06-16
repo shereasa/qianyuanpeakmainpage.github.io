@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> — </title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="contact.css" />
+</head>
+<body class="end-page end-page--happy">
+
+  <div class="end-screen">
+    <div id="endLines"></div>
+    <p class="end-home-link" id="endHome"><a href="fakeend_47.html">回到首页</a></p>
+  </div>
+
+  <script src="ending.js"></script>
+  <script>
+    playEndingLines([
+      '乾元峰高耸的山尖在你们身后渐渐隐去。',
+      '你拉着凌肖一路狂奔，直到你再也看不见景区的任何踪迹。',
+      '"我再也不会点进不明链接了。"你举起手发誓。',
+      '凌肖挑挑眉，显然对你的话半信半疑。',
+      '你掏出手机看了看，时间还在6月21日。',
+      '"救你一命，算不算是你最好的生日礼物？"',
+      '凌肖轻笑一声："算算算，多谢大人救命之恩。"',
+      '你们并肩朝前走去。',
+      '恭喜通关。'
+    ], {
+      lineDelay: 2200,
+      lastIsTitle: true,
+      onComplete: function() { showEndHomeLink('fakeend_47.html'); }
+    });
+  </script>
+</body>
+</html>

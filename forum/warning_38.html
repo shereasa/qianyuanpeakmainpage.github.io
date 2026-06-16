@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>警告 — 乾元峰员工论坛</title>
+  <link rel="stylesheet" href="forum.css" />
+  <style>body { margin: 0; min-width: auto; }</style>
+</head>
+<body class="forum-horror-page forum-horror-page--warning">
+
+  <div class="forum-horror-run-bg" id="runBg" aria-hidden="true"></div>
+
+  <div class="forum-horror-inner">
+    <p class="forum-horror-text forum-horror-text--lg">警告</p>
+    <p class="forum-horror-sub">
+      不要继续刷新<br>
+      立即离开页面
+    </p>
+    <p class="forum-horror-sub forum-horror-sub--hint">
+      您正在访问的内容已被系统标记为异常。<br>
+      继续操作可能导致不可恢复的后果。
+    </p>
+    <div class="forum-horror-btns">
+      <button class="forum-horror-btn" onclick="goHome()">回到论坛首页</button>
+      <button class="forum-horror-btn" onclick="goBadend()">继续刷新</button>
+    </div>
+  </div>
+
+  <script src="forum.js"></script>
+  <script>
+    (function fillRunBg() {
+      var bg = document.getElementById('runBg');
+      var frag = document.createDocumentFragment();
+      for (var i = 0; i < 180; i++) {
+        var s = document.createElement('span');
+        s.textContent = '快跑快跑快跑';
+        frag.appendChild(s);
+      }
+      bg.appendChild(frag);
+    })();
+
+    if (sessionStorage.getItem('forumTrapped') === '1') {
+      window.location.replace('badend_40.html');
+    }
+    function goHome() {
+      if (sessionStorage.getItem('forumTrapped') === '1') {
+        window.location.href = 'badend_40.html';
+      } else {
+        window.location.href = 'chat_33.html';
+      }
+    }
+    function goBadend() {
+      window.location.href = 'badend_39.html';
+    }
+  </script>
+</body>
+</html>

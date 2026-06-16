@@ -36,7 +36,7 @@
       <li class="nav__item"><a href="../overview/guiyun_3.html">景区概览</a></li>
       <li class="nav__item"><a href="../rules_1.html">游览指南</a></li>
       <li class="nav__item"><a href="../services/ticket/ticket_10.html">游客服务</a></li>
-      <li class="nav__item"><a href="../news/news_15.html">景区资讯</a></li>
+      <li class="nav__item"><a href="../news/news/news_15.html">景区资讯</a></li>
       <li class="nav__item nav__item--active"><a href="online_28.html">联系我们</a></li>
     </ul>
   </nav>
@@ -55,7 +55,7 @@
       <ul class="sidebar__list">
         <li class="sidebar__item"><a href="contact_22.html">景区热线</a></li>
         <li class="sidebar__item sidebar__item--active"><a href="online_28.html">在线客服</a></li>
-        <li class="sidebar__item"><a href="staff_forum.html">员工论坛</a></li>
+        <li class="sidebar__item"><a href="../forum/forumlogin_29.html">员工论坛</a></li>
       </ul>
     </aside>
 
@@ -97,20 +97,29 @@
   </footer>
 
   <script>
-    // ★ 关键词问答库（待补充）★
-    // 格式：{ keywords: ['关键词1','关键词2'], answer: '回答内容' }
     var QA = [
-      // 示例占位，等待替换
-      { keywords: ['__placeholder__'], answer: '[ 问答内容待录入 ]' }
+      { keywords: ['出口'], answer: '__exit__' }
     ];
 
-    // 默认回复（未匹配任何关键词时）
     var DEFAULT_REPLY = '感谢您的留言，您的问题已收到，我们将尽快为您回复。如需紧急帮助，请拨打景区热线 0621-17301730。';
+
+    var chatState = 'normal';
+    var lf0330Count = 0;
+    var inputLocked = false;
 
     function pad(n){ return String(n).padStart(2,'0'); }
     function nowStr(){
       var d = new Date();
       return pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+    }
+
+    function normalizeId(text) {
+      return text.trim().toUpperCase().replace(/\s+/g, '');
+    }
+
+    function isYes(text) {
+      var s = text.trim();
+      return /^(是|是的|对|嗯|好|要|销毁|yes|y)$/i.test(s);
     }
 
     function addMsg(text, isUser) {
@@ -138,27 +147,102 @@
       box.scrollTop = box.scrollHeight;
     }
 
+    function replyService(text, delay) {
+      setTimeout(function() {
+        addMsg(text, false);
+      }, delay || 800 + Math.random() * 600);
+    }
+
+    function redirectEnding(page) {
+      inputLocked = true;
+      document.getElementById('chatInput').disabled = true;
+      document.querySelector('.chat-send-btn').disabled = true;
+      setTimeout(function() {
+        window.location.href = page;
+      }, 1200);
+    }
+
+    function handleExitKeyword() {
+      chatState = 'await_id';
+      replyService('请出示相应凭证（输入ID）。');
+    }
+
+    function handleCredential(id) {
+      if (id === 'LF-0158') {
+        replyService('凭证核验通过，正在为您办理离园手续……');
+        redirectEnding('badend_45.html');
+        return;
+      }
+      if (id === 'LF-0621') {
+        replyService('凭证核验通过，正在为您办理离园手续……');
+        redirectEnding('happyend_46.html');
+        return;
+      }
+      if (id === 'LF-0330') {
+        lf0330Count++;
+        replyService('该物品禁止带走。');
+        if (lf0330Count >= 3) {
+          chatState = 'await_destroy';
+          setTimeout(function() {
+            addMsg('是否销毁现有330线路图？', false);
+          }, 1400);
+        }
+        return;
+      }
+      replyService('凭证无效，请重新输入失物编号（格式如 LF-0158）。');
+    }
+
+    function handleDestroyAnswer(text) {
+      if (isYes(text)) {
+        replyService('线路图已销毁。入口关闭程序启动中……');
+        redirectEnding('trueend_48.html');
+      } else {
+        replyService('请确认：是否销毁现有330线路图？（回答"是"以继续）');
+      }
+    }
+
     function getReply(input) {
-      var s = input.toLowerCase();
+      var raw = input.trim();
+      var id = normalizeId(raw);
+
+      if (chatState === 'await_destroy') {
+        handleDestroyAnswer(raw);
+        return null;
+      }
+
+      if (chatState === 'await_id') {
+        handleCredential(id);
+        return null;
+      }
+
+      var s = raw.toLowerCase();
       for (var i = 0; i < QA.length; i++) {
         var kws = QA[i].keywords;
         for (var j = 0; j < kws.length; j++) {
-          if (s.indexOf(kws[j]) !== -1) return QA[i].answer;
+          if (s.indexOf(kws[j]) !== -1) {
+            if (QA[i].answer === '__exit__') {
+              handleExitKeyword();
+              return null;
+            }
+            return QA[i].answer;
+          }
         }
       }
       return DEFAULT_REPLY;
     }
 
     function sendMsg() {
+      if (inputLocked) return;
       var input = document.getElementById('chatInput');
       var text = input.value.trim();
       if (!text) return;
       addMsg(text, true);
       input.value = '';
-      // 模拟打字延迟
-      setTimeout(function(){
-        addMsg(getReply(text), false);
-      }, 800 + Math.random() * 600);
+
+      var reply = getReply(text);
+      if (reply !== null) {
+        replyService(reply);
+      }
     }
 
     document.getElementById('chatInput').addEventListener('keydown', function(e){
