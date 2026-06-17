@@ -98,7 +98,8 @@
 
   <script>
     var QA = [
-      { keywords: ['出口'], answer: '__exit__' }
+      { keywords: ['凌肖'], answer: '__wanted_lingxiao__' },
+      { keywords: ['出口', '出去', '离开'], answer: '__exit__' }
     ];
 
     var DEFAULT_REPLY = '感谢您的留言，您的问题已收到，我们将尽快为您回复。如需紧急帮助，请拨打景区热线 0621-17301730。';
@@ -153,6 +154,32 @@
       }, delay || 800 + Math.random() * 600);
     }
 
+    function replyServiceRich(html, delay) {
+      setTimeout(function() {
+        var box = document.getElementById('chatMessages');
+        var row = document.createElement('div');
+        row.className = 'chat-row chat-row--service';
+
+        var avatar = document.createElement('div');
+        avatar.className = 'chat-avatar';
+        avatar.textContent = '客服';
+
+        var bubble = document.createElement('div');
+        bubble.className = 'chat-bubble chat-bubble--service chat-bubble--rich';
+        bubble.innerHTML = html;
+
+        var t = document.createElement('span');
+        t.className = 'chat-time';
+        t.textContent = nowStr();
+        bubble.appendChild(t);
+
+        row.appendChild(avatar);
+        row.appendChild(bubble);
+        box.appendChild(row);
+        box.scrollTop = box.scrollHeight;
+      }, delay || 800 + Math.random() * 600);
+    }
+
     function redirectEnding(page) {
       inputLocked = true;
       document.getElementById('chatInput').disabled = true;
@@ -164,7 +191,23 @@
 
     function handleExitKeyword() {
       chatState = 'await_id';
-      replyService('请出示相应凭证（输入ID）。');
+      replyService('请出示相应凭证。');
+    }
+
+    function handleLingxiaoKeyword() {
+      var html =
+        '<div class="chat-wanted">' +
+          '<div class="chat-wanted__title">乾元峰景区一级通缉令</div>' +
+          '<img class="chat-wanted__photo" src="lingxiao-wanted.png" alt="凌肖" />' +
+          '<div class="chat-wanted__body">' +
+            '<p><strong>姓名：</strong>凌肖</p>' +
+            '<p><strong>年龄：</strong>未知，大约25岁上下</p>' +
+            '<p><strong>性别：</strong>男</p>' +
+            '<p><strong>罪行：</strong>残忍食用了景区内多名员工</p>' +
+            '<p class="chat-wanted__notice">请见到此人的员工速速与游客服务中心联系，同时注意保护好自身安全。</p>' +
+          '</div>' +
+        '</div>';
+      replyServiceRich(html);
     }
 
     function handleCredential(id) {
@@ -189,7 +232,7 @@
         }
         return;
       }
-      replyService('凭证无效，请重新输入失物编号（格式如 LF-0158）。');
+      replyService('凭证无效，请重新输入失物编号（格式如 LF-0000）。');
     }
 
     function handleDestroyAnswer(text) {
@@ -215,13 +258,16 @@
         return null;
       }
 
-      var s = raw.toLowerCase();
       for (var i = 0; i < QA.length; i++) {
         var kws = QA[i].keywords;
         for (var j = 0; j < kws.length; j++) {
-          if (s.indexOf(kws[j]) !== -1) {
+          if (raw.indexOf(kws[j]) !== -1) {
             if (QA[i].answer === '__exit__') {
               handleExitKeyword();
+              return null;
+            }
+            if (QA[i].answer === '__wanted_lingxiao__') {
+              handleLingxiaoKeyword();
               return null;
             }
             return QA[i].answer;

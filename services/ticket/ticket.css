@@ -224,6 +224,45 @@
 }
 .terror-weird p { color: #aaa; line-height: 1.8; }
 .terror-dots { color: #666; }
+
+/* 员工登录入口（购票失败页） */
+.terror-staff-entry {
+  margin: 32px auto 0;
+  max-width: 480px;
+  padding: 20px 24px;
+  background: #f0f5ee;
+  border: 1px solid #c5d9c0;
+  border-left: 4px solid var(--green-nav);
+  border-radius: 0 4px 4px 0;
+  text-align: center;
+}
+.terror-staff-tip {
+  font-size: 15px;
+  color: var(--text-main);
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  margin: 0 0 14px;
+}
+.terror-staff-tip strong {
+  color: var(--green-dark);
+  font-weight: 700;
+}
+.terror-staff-btn {
+  display: inline-block;
+  padding: 10px 36px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  background: var(--green-nav);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.18s, transform 0.1s;
+}
+.terror-staff-btn:hover {
+  background: var(--green-hover);
+  transform: translateY(-1px);
+}
  
 /* ============================================================
    员工登录页 (ticketlogin_12)
