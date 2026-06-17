@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> — </title>
+  <link rel="stylesheet" href="forum.css" />
+  <style>body { margin: 0; min-width: auto; }</style>
+</head>
+<body class="forum-horror-page">
+
+  <div class="forum-horror-welcome-bg" id="welcomeBg" aria-hidden="true"></div>
+
+  <div class="forum-horror-inner">
+    <p class="forum-horror-text forum-horror-text--lg">为什么要离开？</p>
+    <p class="forum-horror-text">你已经逃不掉了</p>
+  </div>
+
+  <script src="forum.js"></script>
+  <script>
+    forumFillWelcomeBg('welcomeBg', 180);
+    forumSetTrapped();
+
+    document.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = 'badend_40.html';
+    });
+
+    window.addEventListener('keydown', function(e) {
+      e.preventDefault();
+      window.location.href = 'badend_40.html';
+    });
+
+    window.addEventListener('beforeunload', function(e) {
+      e.preventDefault();
+    });
+  </script>
+</body>
+</html>
