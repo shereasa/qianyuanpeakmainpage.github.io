@@ -294,9 +294,9 @@
 }
 
 .chat-bubble--rich {
-  max-width: 78%;
+  max-width: 320px;
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .chat-wanted__title {
@@ -312,9 +312,8 @@
 .chat-wanted__photo {
   display: block;
   width: 100%;
-  max-height: 280px;
-  object-fit: cover;
-  object-position: center top;
+  height: auto;
+  object-fit: contain;
   border-bottom: 2px solid #8b1a1a;
 }
 
